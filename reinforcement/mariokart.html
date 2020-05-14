@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+	<meta charset="utf-8"/>
+        <title>Mario Kart!</title>
+	<script src = "/socket.io/socket.io.js"></script>
+	<script src="./mariokart.js"></script>
+        <style type="text/css" media="all"> 
+        #mariokartcontainer img {
+            padding : 0 !important;
+            margin : 0 !important;
+            border : none !important;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="mariokartcontainer" style="height:400px;position:relative;" />
+<button id="bouge" onclick='MarioKart.moveRandomPlayer()'>move</button>
+     
+     <script>
+	    var socket = io();
+            socket.on('move', function(move) {
+                console.log(move);
+		res = MarioKart.moveDirection(parseInt(move));
+		console.log(res);
+                socket.emit('position',res);
+            });
+        </script>
+    </body>
+</html>
